@@ -1,0 +1,59 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>配列(JavaScript)</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>#main{margin:5px;padding: 5px; background: #666;color:#fff;}</style>
+</head>
+<body>
+<h1>配列</h1>
+
+<!-- ここに日時を表示させる -->
+<input type="text" id="title">
+<button id="add">追加</button>
+<div id="view"></div>
+<!-- ここに日時を表示させる -->
+
+<script>
+//TODO：タイトル
+const titles = [];
+//追加ボタン
+document.querySelector("#add").addEventListener("click", function(){
+    //表示を削除
+    document.querySelector("#view").innerHTML="";
+    //配列に追加
+    titles.push(document.querySelector("#title").value);
+    //配列を表示
+    titles.map( (title, i) => {
+        const v = document.querySelector("#view");
+        const d = document.createElement("div");
+        d.className = "delete";
+        d.setAttribute("data-titles",i);
+        d.innerHTML=title;
+        v.insertBefore(d, v.firstElementChild); 
+    });
+});
+
+//表示リスト＆削除
+document.querySelector("div").addEventListener("click",function(e){
+    if(e.target.className == "delete") {
+        document.querySelector("#view").innerHTML="";
+        //配列から１つ削除
+        titles.splice( e.target.getAttribute("data-titles"), 1 );
+        //配列を表示
+        titles.map( (title, i) => {
+            console.log(i);
+            const v = document.querySelector("#view");
+            const d = document.createElement("div");
+            d.className = "delete";
+            d.setAttribute("data-titles",i);
+            d.innerHTML=title;
+            v.insertBefore(d, v.firstElementChild); 
+        });
+    }
+});
+</script>
+</body>
+</html>
